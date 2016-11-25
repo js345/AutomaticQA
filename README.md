@@ -6,3 +6,4 @@ where Id in (
   select AcceptedAnswerId from Posts
   where Tags like '%<python>%' and AcceptedAnswerId is Not null)) p2
 on p1.AcceptedAnswerId = p2.AnswerId
+order by p1.Id asc
