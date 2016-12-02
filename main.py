@@ -4,7 +4,10 @@ Created on 11/25/16
 @author: xiaofo
 '''
 
-import numpy as np
+from src.Dataloader import load
+from src.AutomaticQA import AutomaticQA
 
 path = 'data/QueryResults.csv'
+data = load(path)
 
+automaticQA = AutomaticQA(data, 500)

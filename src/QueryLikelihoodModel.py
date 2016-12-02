@@ -22,7 +22,7 @@ class QueryLikelihoodModel:
         self.word_counts = list()
         self.build_model()
 
-    def build_model(self):
+    def build_model(self) -> None:
         '''
         Build the model by counting word occurrences
         :return:
@@ -32,10 +32,10 @@ class QueryLikelihoodModel:
             word_count = dict()
             for word in doc.split():
                 self.vocabs[word] = self.vocabs.get(word, 0) + 1
-                word_count[word] = word.get(word, 0) + 1
+                word_count[word] = word_count.get(word, 0) + 1
             self.word_counts.append(word_count)
 
-    def retrieve_answers(self, question):
+    def retrieve_answers(self, question: str) -> list:
         question = question.split()
         query_count = dict()
         for word in question:
@@ -47,5 +47,6 @@ class QueryLikelihoodModel:
                 smoothed_value = self.word_counts[i].get(word, 0) + self.mu * self.vocabs[word] / self.word_num
                 smoothed_value /= len(self.docs[i].split()) + self.mu
                 score += query_count[word] * np.log(smoothed_value)
-            scores.append(score)
+            scores.append(0-score)
+        print(scores)
         return ss.rankdata(scores)

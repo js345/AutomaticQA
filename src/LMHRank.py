@@ -4,6 +4,8 @@ Created on 11/30/16
 @author: xiaofo
 '''
 
+from src.QueryLikelihoodModel import QueryLikelihoodModel
+
 
 class LMHRANK:
     ranks = list()
@@ -12,6 +14,6 @@ class LMHRANK:
         pass
 
     @staticmethod
-    def compute_scores(model):
+    def compute_scores(model: QueryLikelihoodModel) -> list:
         for doc in model.docs:
             pass
