@@ -44,5 +44,5 @@ class AutomaticQA:
         for i in range(len(self.LMHranks)):
             for j in range(i + 1, len(self.LMHranks[i])):
                 if self.LMHranks[i][j] > threshold:
-                    pairs.append(i, j)
+                    pairs.append((i, j))
         return pairs
