@@ -35,10 +35,16 @@ class QueryLikelihoodModel:
                 word_count[word] = word_count.get(word, 0) + 1
             self.word_counts.append(word_count)
 
-    def retrieve_answers(self, question: str) -> list:
-        question = question.split()
+    def retrieve_answers(self, query: str) -> list:
+        """
+        Retrieve answer given query
+        :param query:
+        :return:
+        :rtype:
+        """
+        query = query.split()
         query_count = dict()
-        for word in question:
+        for word in query:
             query_count[word] = query_count.get(word, 0) + 1
         scores = list()
         for i, doc in enumerate(self.docs):
@@ -48,5 +54,4 @@ class QueryLikelihoodModel:
                 smoothed_value /= len(self.docs[i].split()) + self.mu
                 score += query_count[word] * np.log(smoothed_value)
             scores.append(0-score)
-        print(scores)
         return ss.rankdata(scores)

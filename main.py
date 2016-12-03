@@ -10,4 +10,4 @@ from src.AutomaticQA import AutomaticQA
 path = 'data/QueryResults.csv'
 data = load(path)
 
-automaticQA = AutomaticQA(data, 500)
+automaticQA = AutomaticQA(data, 50)
