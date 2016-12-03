@@ -51,7 +51,7 @@ class QueryLikelihoodModel:
             score = 0
             for word in query_count:
                 smoothed_value = self.word_counts[i].get(word, 0) + self.mu * self.vocabs[word] / self.word_num
-                smoothed_value /= len(self.docs[i].split()) + self.mu
+                smoothed_value /= len(doc.split()) + self.mu
                 score += query_count[word] * np.log(smoothed_value)
             scores.append(0-score)
         return ss.rankdata(scores)

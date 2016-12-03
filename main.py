@@ -14,5 +14,5 @@ data = load(path)
 automaticQA = AutomaticQA(data, 50)
 pairs = automaticQA.find_relevant_questions(0.05)
 
-show_relevant_questions(pairs)
+show_relevant_questions(pairs, automaticQA)
 
