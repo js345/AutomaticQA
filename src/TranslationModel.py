@@ -19,7 +19,7 @@ class TranslationModel:
         self.word_counts = word_counts
         self.vocabs = vocabs
 
-    def retrieve_answers(self, query):
+    def retrieve_answers(self, query: str) -> list:
         query = query.split()
         query_count = dict()
         for word in query:
@@ -32,5 +32,5 @@ class TranslationModel:
                 smoothed_value += self.λ * self.vocabs[word]
                 score += query_count[word] * np.log(smoothed_value)
             scores.append(0-score)
-        return ss.rankdata(scores)
+        return scores
 
