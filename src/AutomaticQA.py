@@ -7,6 +7,7 @@ Created on 11/30/16
 from __future__ import division
 from src.QueryLikelihoodModel import QueryLikelihoodModel
 from src.LMHRank import LMHRANK
+from src.WordTranslation import WordTranslation
 
 
 class AutomaticQA:
@@ -29,8 +30,13 @@ class AutomaticQA:
     def fetch_answer(self, question: str) -> str:
         pass
 
-    def calculate_answer_similarity(self):
-        pass
+    def calculate_word_translation(self, threshold):
+        pairs = list()
+        for i in range(len(self.LMHranks)):
+            for j in range(i, len(self.LMHranks[i])):
+                if self.LMHranks[i][j] > threshold:
+                    pairs.append((self.title[i].split(), self.title[j].split()))
+        WordTranslation.train(pairs)
 
     def find_relevant_questions(self, threshold: int) -> list:
         """
@@ -42,7 +48,7 @@ class AutomaticQA:
         """
         pairs = list()
         for i in range(len(self.LMHranks)):
-            for j in range(i + 1, len(self.LMHranks[i])):
+            for j in range(i, len(self.LMHranks[i])):
                 if self.LMHranks[i][j] > threshold:
                     pairs.append((i, j))
         return pairs

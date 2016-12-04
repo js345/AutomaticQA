@@ -24,6 +24,6 @@ class LMHRANK:
             rank = model.retrieve_answers(doc)
             ranks.append(rank)
         for i in range(len(ranks)):
-            for j in range(i + 1, len(ranks[i])):
+            for j in range(i, len(ranks[i])):
                 ranks[i][j] = (1 / ranks[i][j] + 1 / ranks[j][i]) / 2
         return ranks
