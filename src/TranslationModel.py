@@ -19,6 +19,13 @@ class TranslationModel:
         self.vocabs = vocabs
 
     def retrieve_answers(self, query: str) -> list:
+        """
+        Given a query retrieve
+        :param query:
+        :type query:
+        :return:
+        :rtype:
+        """
         query = query.split()
         query_count = dict()
         for word in query:

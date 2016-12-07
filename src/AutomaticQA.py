@@ -28,29 +28,48 @@ class AutomaticQA:
         self.translation_model = None
 
     def train(self):
+        """
+        Train the model from scratch and calculate word translation table
+        :return:
+        :rtype:
+        """
         self.queryLikelihoodModel.build_model()
         self.LMHranks = LMHRANK.compute_scores(self.queryLikelihoodModel)
         self.translation_table = self.calculate_word_translation(self.threshold)
-        self.translation_model = TranslationModel(self.answer, self.λ, self.translation_table,
+        self.translation_model = TranslationModel(self.title, self.λ, self.translation_table,
                     self.queryLikelihoodModel.word_counts, self.queryLikelihoodModel.vocabs)
 
     def load_info(self):
+        """
+        Load model from disk
+        :return:
+        :rtype:
+        """
         with open("data/translation.json", 'r') as outfile:
             self.translation_table = json.load(outfile)
         with open("data/word_count.json", 'r') as outfile:
             self.queryLikelihoodModel.word_counts = json.load(outfile)
         with open("data/vocab.json", 'r') as outfile:
             self.queryLikelihoodModel.vocabs = json.load(outfile)
-        self.translation_model = TranslationModel(self.answer, self.λ, self.translation_table,
+        with open("data/rank.json", 'w+') as outfile:
+            self.LMHranks = json.load(outfile)
+        self.translation_model = TranslationModel(self.title, self.λ, self.translation_table,
                                                 self.queryLikelihoodModel.word_counts, self.queryLikelihoodModel.vocabs)
 
     def save_info(self):
+        """
+        Save model to disk
+        :return:
+        :rtype:
+        """
         with open("data/translation.json", 'w+') as outfile:
             json.dump(self.translation_table, outfile)
         with open("data/word_count.json", 'w+') as outfile:
             json.dump(self.queryLikelihoodModel.word_counts, outfile)
         with open("data/vocab.json", 'w+') as outfile:
             json.dump(self.queryLikelihoodModel.vocabs, outfile)
+        with open("data/rank.json", 'w+') as outfile:
+            json.dump(self.LMHranks, outfile)
 
     @staticmethod
     def build_query_likelihood_model(answers, mu: float) -> QueryLikelihoodModel:

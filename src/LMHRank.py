@@ -6,6 +6,7 @@ Created on 11/30/16
 
 from __future__ import division
 from src.QueryLikelihoodModel import QueryLikelihoodModel
+import numpy as np
 
 
 class LMHRANK:
@@ -26,4 +27,4 @@ class LMHRANK:
         for i in range(len(ranks)):
             for j in range(i, len(ranks[i])):
                 ranks[i][j] = (1 / ranks[i][j] + 1 / ranks[j][i]) / 2
-        return ranks
+        return np.array(ranks)
