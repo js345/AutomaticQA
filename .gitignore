@@ -95,3 +95,7 @@ ENV/
 *.xml
 
 *.csv
+
+*.json
+
+data/translation.json

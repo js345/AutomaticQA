@@ -6,7 +6,6 @@ Created on 12/3/16
 
 from nltk import IBMModel1
 from nltk import AlignedSent
-import json
 
 
 class WordTranslation:
@@ -17,6 +16,5 @@ class WordTranslation:
         for q1, q2 in pairs:
             corpus.append(AlignedSent(q1, q2))
         em_ibm1 = IBMModel1(corpus, 20)
-        with open("data/translation.json", 'w+') as outfile:
-            json.dump(em_ibm1.translation_table, outfile)
+        print(em_ibm1.translation_table)
         return em_ibm1.translation_table

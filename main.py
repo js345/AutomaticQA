@@ -12,6 +12,7 @@ path = 'data/QueryResults.csv'
 data = load(path)
 
 automaticQA = AutomaticQA(data, 50)
+automaticQA.train()
 pairs = automaticQA.find_relevant_questions(0.05)
 
 # show_relevant_questions(pairs, automaticQA)

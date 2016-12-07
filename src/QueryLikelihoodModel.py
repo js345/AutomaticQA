@@ -14,13 +14,12 @@ class QueryLikelihoodModel:
     Query Likelihood Model with Dirichlet Smoothing
     '''
 
-    def __init__(self, docs, mu):
+    def __init__(self, docs, mu, vocabs=dict(), word_counts=list()):
         self.docs = docs
         self.word_num = sum(len(doc.split()) for doc in docs)
         self.mu = mu
-        self.vocabs = dict()
-        self.word_counts = list()
-        self.build_model()
+        self.vocabs = vocabs
+        self.word_counts = word_counts
 
     def build_model(self) -> None:
         '''

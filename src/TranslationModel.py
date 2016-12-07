@@ -6,7 +6,6 @@ Created on 12/3/16
 
 
 from __future__ import division
-import scipy.stats as ss
 import numpy as np
 
 
@@ -31,6 +30,6 @@ class TranslationModel:
                 smoothed_value = (1 - self.λ) * sum(self.translation_table[term].get(word, 0) * self.word_counts[i] for term in self.translation_table)
                 smoothed_value += self.λ * self.vocabs[word]
                 score += query_count[word] * np.log(smoothed_value)
-            scores.append(0-score)
+            scores.append(score)
         return scores
 
