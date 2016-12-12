@@ -12,11 +12,13 @@ path = 'data/QueryResults.csv'
 data = load(path)
 
 automaticQA = AutomaticQA(data, 50)
-automaticQA.train()
-automaticQA.save_info()
-pairs = automaticQA.find_relevant_questions(0.05)
-
-#automaticQA.load_info()
+#automaticQA.train()
+#automaticQA.save_info()
 #pairs = automaticQA.find_relevant_questions(0.05)
 
-show_relevant_questions(pairs, automaticQA)
+automaticQA.load_info()
+pairs = automaticQA.find_relevant_questions(0.05)
+
+print(automaticQA.fetch_answer("Why does this try/except/else function return None?"))
+
+#show_relevant_questions(pairs, automaticQA)

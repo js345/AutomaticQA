@@ -9,6 +9,7 @@ from src.QueryLikelihoodModel import QueryLikelihoodModel
 from src.LMHRank import LMHRANK
 from src.WordTranslation import WordTranslation
 from src.TranslationModel import TranslationModel
+import numpy as np
 import json
 
 
@@ -76,7 +77,8 @@ class AutomaticQA:
         return QueryLikelihoodModel(answers, mu)
 
     def fetch_answer(self, question: str) -> str:
-        pass
+        scores = self.translation_model.retrieve_answers(question)
+        return self.answer[scores.index(np.amax(scores))]
 
     def calculate_word_translation(self, threshold):
         pairs = list()

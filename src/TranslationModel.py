@@ -34,9 +34,9 @@ class TranslationModel:
         for i, doc in enumerate(self.docs):
             score = 0
             for word in query_count:
-                smoothed_value = (1 - self.λ) * sum(self.translation_table[term].get(word, 0) * self.word_counts[i] for term in self.translation_table)
-                smoothed_value += self.λ * self.vocabs[word]
+                smoothed_value = (1 - self.λ) * sum(self.translation_table[term].get(word, 0) * self.word_counts[i].get(term,0) for term in self.translation_table)
+                if(word in self.vocabs) :
+                    smoothed_value += self.λ * self.vocabs[word]
                 score += query_count[word] * np.log(smoothed_value)
             scores.append(score)
         return scores
-
