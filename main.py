@@ -20,4 +20,3 @@ pairs = automaticQA.find_relevant_questions(0.05)
 #pairs = automaticQA.find_relevant_questions(0.05)
 
 show_relevant_questions(pairs, automaticQA)
-

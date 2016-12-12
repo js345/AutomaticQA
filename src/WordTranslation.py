@@ -16,5 +16,4 @@ class WordTranslation:
         for q1, q2 in pairs:
             corpus.append(AlignedSent(q1, q2))
         em_ibm1 = IBMModel1(corpus, 20)
-        print(em_ibm1.translation_table)
         return em_ibm1.translation_table

@@ -51,7 +51,7 @@ class AutomaticQA:
             self.queryLikelihoodModel.word_counts = json.load(outfile)
         with open("data/vocab.json", 'r') as outfile:
             self.queryLikelihoodModel.vocabs = json.load(outfile)
-        with open("data/rank.json", 'w+') as outfile:
+        with open("data/rank.json", 'r') as outfile:
             self.LMHranks = json.load(outfile)
         self.translation_model = TranslationModel(self.title, self.λ, self.translation_table,
                                                 self.queryLikelihoodModel.word_counts, self.queryLikelihoodModel.vocabs)
@@ -69,7 +69,7 @@ class AutomaticQA:
         with open("data/vocab.json", 'w+') as outfile:
             json.dump(self.queryLikelihoodModel.vocabs, outfile)
         with open("data/rank.json", 'w+') as outfile:
-            json.dump(self.LMHranks, outfile)
+            json.dump(self.LMHranks.tolist(), outfile)
 
     @staticmethod
     def build_query_likelihood_model(answers, mu: float) -> QueryLikelihoodModel:
